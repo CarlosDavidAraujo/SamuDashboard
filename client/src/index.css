@@ -1,0 +1,51 @@
+:root {
+  --cor-principal: #146C94;
+  --cor-secundaria: #AFD3E2;
+  --cor-destaque: #19A7CE;
+  --cor-fundo: #F6F1F1;
+  --cor-borda: gray;
+
+  --border-radius-md: 10px;
+  --card-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Poppins', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 100%;
+  list-style-type: none;
+  background-color: var(--cor-fundo);
+  overflow: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+*, 
+*:after,
+*:before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Estiliza a thumb do scroll */
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+/* Estiliza a thumb do scroll quando hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
