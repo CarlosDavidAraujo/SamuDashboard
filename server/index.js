@@ -1,9 +1,10 @@
+require('dotenv').config();
 const app = require('./app');
 const appWs = require('./app-ws');
 
-const port = 3001
+const port = process.env.PORT || 4000;
 
-const server = app.listen(process.env.PORT || port, () => {
+const server = app.listen(port,  () => {
     console.log(`App Express is running on port ${port}`);
 })
 

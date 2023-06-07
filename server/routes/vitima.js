@@ -3,8 +3,6 @@ const vitimaControllers = require('../controllers/vitima');
 
 const router = express.Router();
 
-router.post('/sexo', vitimaControllers.consultaTotalVitimasPorSexo);
-router.post('/idade', vitimaControllers.consultaTotalVitimasPorIdade);
-router.post('/tipo', vitimaControllers.consultaTotalVitimasPorTipo);
+router.get('/estatisticas', vitimaControllers.consultaEstatisticasDeVitimas);
 
 module.exports = router;

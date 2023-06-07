@@ -33,10 +33,13 @@ function onConnection(ws, req) {
   const activeClients = Object.keys(clients);
   console.log("Active clients:", activeClients);
 
-  // Define o intervalo para atualização periódica do console dos clientes
+  //envio inicial dos dados
+  handleOcorrencia(ws);
+
+  // Define o intervalo para atualização periódica dos envios subsequentes
   const interval = setInterval(() => {
     handleOcorrencia(ws);
-  }, 5000);
+  }, 50000);
 
   // Manipula o evento de fechamento da conexão
   ws.on("close", function () {
