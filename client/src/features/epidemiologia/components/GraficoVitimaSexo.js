@@ -20,22 +20,22 @@ ChartJS.register(
 );
 
 export function GraficoVitimaSexo({ chartData }) {
+  const colors = ["gray", "#19A7CE", "pink"];
+
+  const datasets = chartData.map((item, index) => ({
+    label: item.Sexo,
+    data: [item.TotalVitimas],
+    backgroundColor: colors[index],
+  }));
+
   const data = {
-    labels: chartData.map((sexo) => sexo.Sexo),
-    datasets: [
-      {
-        data: chartData.map((sexo) => sexo.TotalVitimas),
-        backgroundColor: ["gray", "#19A7CE", "pink"],
-      },
-    ],
+    labels: ["Gênero"],
+    datasets: datasets,
   };
 
   const options = {
     // Configurações do gráfico
     plugins: {
-      legend: {
-        display: false,
-      },
       title: {
         display: true,
         text: "Nº Vítimas x Sexo", // Define o título do gráfico

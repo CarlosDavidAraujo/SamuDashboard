@@ -1,78 +1,71 @@
 import styled from "styled-components";
-import { Veiculo } from "./OcorrenciaVeiculo";
+import { getColorByRisk } from "../utils/getColorByRisk";
+import { formatToPascalCaseWithSpace } from "../../../shared/utils/formatToPascalCase";
+import { OcorrenciaVeiculos } from "./OcorrenciaVeiculos";
 
-export function OcorrenciaCard({ ocorrencia }) {
-  const veiculos = JSON.parse(ocorrencia.Veiculos);
+export function OcorrenciaCard({ ocorrencia, onClick }) {
+  const veiculos = JSON.parse(ocorrencia.veiculos);
+  const ocorrenciaID = ocorrencia.id.slice(-4);
+  const bairro = formatToPascalCaseWithSpace(ocorrencia.bairro);
 
   return (
-    <Card>
-      <OcorrenciaID>{ocorrencia.OcorrenciaID}</OcorrenciaID>
-      <h3 style={{ textTransform: "uppercase" }}>{ocorrencia.MotivoDS}</h3>
+    <Container risk={ocorrencia.risco} onClick={onClick}>
+      <OcorrenciaID>{ocorrenciaID}</OcorrenciaID>
+      <CardTitle>{ocorrencia.motivo}</CardTitle>
       <CardBody>
-        <CardText>
-          <CardTextCampo>MÉDICO REGULADOR: </CardTextCampo>
-          <CardTextValor>{ocorrencia.OperadorNM}</CardTextValor>
-        </CardText>
-        <CardText>
-          <CardTextCampo>BAIRRO: </CardTextCampo>{" "}
-          <CardTextValor> {ocorrencia.Bairro}</CardTextValor>
-        </CardText>
-        {veiculos && (
-          <Veiculos>
-            {veiculos.map((veiculo, key) => (
-              <Veiculo status={veiculo.Status} key={key}>
-                {veiculo.VeiculoDS}
-              </Veiculo>
-            ))}
-          </Veiculos>
-        )}
+        <Field>
+          Médico regulador:
+          <span>{ocorrencia.operador}</span>
+        </Field>
+        <Field>
+          Bairro:
+          <span>{bairro}</span>
+        </Field>
+        <OcorrenciaVeiculos ocorrencia={ocorrencia}/>
       </CardBody>
-    </Card>
+    </Container>
   );
 }
 
-const Card = styled.div`
-  border-radius: var(--border-radius-md);
+const Container = styled.button`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 5px;
   padding: 10px;
-  background-color: var(--cor-secundaria);
-  box-shadow: var(--card-shadow);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+
+  background: #ffffff;
+  border-left: 5px solid ${({ risk }) => getColorByRisk(risk)};
+  box-shadow: var(--shadow-1);
+
+  font-family: inherit;
+  color: var(--text-dark);
 `;
 
 const OcorrenciaID = styled.h4`
-  width: max-content;
-  padding: 0 5px;
-  border-radius: 5px;
-  background-color: var(--cor-destaque);
-  color: white;
+  align-self: flex-end;
+`;
+
+const CardTitle = styled.h3`
+  text-transform: uppercase;
+  text-align: start;
 `;
 
 const CardBody = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3px;
+  align-items: flex-start;
 `;
 
-const CardText = styled.h4`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 5px;
-`;
-
-const CardTextCampo = styled.h5`
-  font-weight: 600;
-`;
-
-const CardTextValor = styled.h5`
-  font-weight: 400;
-`;
-
-const Veiculos = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 5px;
+const Field = styled.h4`
+  font-weight: 500;
+  font-size: var(--font-sm);
+  span {
+    font-weight: 700;
+    margin-left: 5px;
+  }
 `;

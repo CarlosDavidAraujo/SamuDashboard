@@ -1,14 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChartSimple,
-  faGear,
   faPhoneVolume,
+  faClock
 } from "@fortawesome/free-solid-svg-icons";
 
 export const navData = [
   {
     label: "Ocorrências",
-    pathname: "/ocorrencias",
+    pathname: "/",
     icon: <FontAwesomeIcon icon={faPhoneVolume} />,
   },
   {
@@ -17,8 +17,8 @@ export const navData = [
     icon: <FontAwesomeIcon icon={faChartSimple} />,
   },
   {
-    label: "Configurações",
-    pathname: "#config",
-    icon: <FontAwesomeIcon icon={faGear} />,
-  },
+    label: "Tempo resposta",
+    pathname: "/temporesposta",
+    icon: <FontAwesomeIcon icon={faClock}/> 
+  }
 ];

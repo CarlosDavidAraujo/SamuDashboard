@@ -1,15 +1,19 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes";
-import { IoProvider } from "socket.io-react-hook";
-import { Navbar } from "./shared/components/navbar/Navbar";
+import { MainLayout } from "./shared/layouts/MainLayout";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <>
-      <Navbar>
+    <QueryClientProvider client={queryClient}>
+      <MainLayout>
         <RouterProvider router={router} />
-      </Navbar>
-    </>
+      </MainLayout>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

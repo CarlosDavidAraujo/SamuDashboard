@@ -1,59 +1,52 @@
 import styled from "styled-components";
+
 import { GraficoVitimaSexo } from "../components/GraficoVitimaSexo";
 import { GraficoVitimaTipo } from "../components/GraficoVitimaTipo";
 import { GraficoVitimaIdade } from "../components/GraficoVitimaIdade";
-import { useAxios } from "../../../shared/hooks/useAxios";
-import axios from "axios";
-import { api } from "../../../shared/services/api";
-import { useEffect, useState } from "react";
-import { useChartDataByMonth } from "../hooks/useChartDataByMonth";
+import { Input } from "../../../shared/components/inputs/Input";
+import { useChartDataByDate } from "../hooks/useChartDataByDate";
+import { useMonth } from "../../../shared/hooks/useMonth";
 
 export function EpidemiologiaPage() {
-  const [mes, setMes] = useState(1);
-  const { sexoData, idadeData, tipoData, isLoading, error } =
-    useChartDataByMonth(mes);
+  const {month, handleMonthChange} = useMonth();
+  const { error, isError, isLoading, data } = useChartDataByDate(month);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
+  if (isError) {
     return <div>Error: {error}</div>;
   }
 
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setMes(value);
-  };
-
   return (
-    <>
-      <select value={mes} onChange={handleChange}>
-        {Array.from({ length: 12 }, (_, index) => {
-          const month = index + 1;
-          const monthName = new Date(0, month - 1).toLocaleString("default", {
-            month: "long",
-          });
-          return (
-            <option key={month} value={month}>
-              {monthName}
-            </option>
-          );
-        })}
-      </select>
+    <Container>
+      <Filters>
+        <Input type="month" value={month} onChange={handleMonthChange} />
+      </Filters>
 
-      <Container>
-        <GraficoVitimaSexo chartData={sexoData} />
-        <GraficoVitimaTipo chartData={tipoData} />
-        <GraficoVitimaIdade chartData={idadeData} />
-      </Container>
-    </>
+      <ChartList>
+        <GraficoVitimaSexo chartData={data.dataSexo} />
+        <GraficoVitimaTipo chartData={data.dataTipo} />
+        <GraficoVitimaIdade chartData={data.dataIdade} />
+      </ChartList>
+    </Container>
   );
 }
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  display: flex;
+  flex-direction: column;
   padding: 20px;
+`;
+
+const Filters = styled.div`
+  margin-bottom: 40px;
+  display: flex;
+`;
+
+const ChartList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 10px;
 `;

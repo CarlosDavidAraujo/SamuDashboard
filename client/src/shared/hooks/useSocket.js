@@ -3,9 +3,7 @@ import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 
 export const useSocket = (eventName) => {
   const [data, setData] = useState([]);
-  const socketUrl = "ws://localhost:3001";
-
-  const { lastMessage } = useWebSocket(socketUrl, {
+  const { lastMessage } = useWebSocket(process.env.REACT_APP_SOCKET_API_URL, {
     share: true,
     onOpen: () => console.log(`Connected to App WS`),
     //queryParams: { 'token': '123456' },
@@ -17,6 +15,7 @@ export const useSocket = (eventName) => {
   });
 
   useEffect(() => {
+    console.log(process.env.REACT_APP_SOCKET_API_URL);
     if (lastMessage !== null) {
       const message = JSON.parse(lastMessage.data);
       if (message.event === eventName) {
@@ -24,7 +23,7 @@ export const useSocket = (eventName) => {
         setData(message.data);
       }
     }
-  }, [lastMessage, setData]);
+  }, [lastMessage, setData, eventName]);
 
   return data;
 };

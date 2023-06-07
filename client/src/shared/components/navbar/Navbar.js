@@ -9,54 +9,37 @@ export function Navbar({ children }) {
   const [expanded, toogleSideBar] = useToggle(false);
 
   return (
-    <>
-      <Header>
+    <Sidebar expanded={expanded} >
+      <BarsIcon>
         <FontAwesomeIcon
           icon={faBars}
           onClick={toogleSideBar}
           size="xl"
-          color="var(--cor-fundo)"
+          color="var(--primary)"
         />
-      </Header>
-      <Sidebar expanded={expanded}>
-        <SidebarIcon>
-          <FontAwesomeIcon
-            icon={faBars}
-            onClick={toogleSideBar}
-            size="xl"
-            color="var(--cor-principal)"
-          />
-        </SidebarIcon>
-        <SidebarItems>
-          {navData.map((itemData, key) => (
-            <NavItem itemData={itemData} navExpanded={expanded} key={key} />
-          ))}
-        </SidebarItems>
-      </Sidebar>
-      <PageContent expanded={expanded}>{children}</PageContent>
-    </>
+      </BarsIcon>
+      <SidebarItems>
+        {navData.map((itemData, key) => (
+          <NavItem itemData={itemData} navExpanded={expanded} key={key} />
+        ))}
+      </SidebarItems>
+    </Sidebar>
   );
 }
-
-const Header = styled.div`
-  width: 100vw;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  background-color: var(--cor-principal);
-`;
 
 const Sidebar = styled.div`
   height: 100vh;
   top: 0;
-  position: fixed;
-  background-color: var(--cor-fundo);
+  position: sticky;
+  z-index: 1000;
+
   background-color: white;
-  box-shadow: var(--card-shadow);
-  transition: ${(props) => (props.expanded ? 200 : 50)}ms;
+  box-shadow: var(--shadow-1);
+  
+  transition: width 2s ease;
 `;
 
-const SidebarIcon = styled.div`
+const BarsIcon = styled.div`
   padding: 10px 20px;
 `;
 
@@ -65,8 +48,4 @@ const SidebarItems = styled.ul`
   flex-direction: column;
   gap: 10px;
   padding: 10px;
-`;
-
-const PageContent = styled.div`
-  margin-left: ${(props) => (props.expanded ? 210 : 60)}px;
 `;

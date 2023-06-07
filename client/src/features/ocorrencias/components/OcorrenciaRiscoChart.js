@@ -1,21 +1,26 @@
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Title, Tooltip, Legend } from "chart.js";
-import styled from "styled-components";
 import { ChartContainer } from "../../../shared/components/ChartContainer";
 
 ChartJS.register(ArcElement, Title, Tooltip, Legend);
 
-export function OcorrenciaRiscoChart({ riscos }) {
+export function OcorrenciaRiscoChart({ riskCount }) {
   const data = {
-    labels: riscos.map((item) => `Risco ${item.RISCOCOD}`),
+    labels: Object.keys(riskCount).map((risco) => {
+      if (risco === "90") {
+        return "Sem classificação";
+      }
+      return `Risco ${risco}`;
+    }),
     datasets: [
       {
-        data: riscos.map((item) => item.TotalOcorrencias),
+        data: Object.values(riskCount),
         backgroundColor: [
-          "#db0404", //risco 1 vermelho
-          "#ec9010", //risco 2 amarelo
-          "#1a8d02", //risco 3 verde
-          "#0149b5", //risco 4 azul
+          "#d25151", //risco 1 vermelho
+          "#D2C551", //risco 2 amarelo
+          "#518CD2", //risco 3 verde
+          "#51D275", //risco 4 azul
+          "#333333", //sem classificaçao
           // Adicione mais cores de fundo conforme necessário
         ],
       },
@@ -37,9 +42,8 @@ export function OcorrenciaRiscoChart({ riscos }) {
   };
 
   return (
-    <ChartContainer>
+    <ChartContainer style={{maxWidth: "max-content"}}>
       <Pie data={data} options={options} />
     </ChartContainer>
   );
 }
-

@@ -22,7 +22,7 @@ ChartJS.register(
 
 export function GraficoVitimaTipo({ chartData }) {
   const data = {
-    labels: chartData.map((tipo) => tipo.Tipo),
+    labels: chartData.map((tipo) => tipo.TipoDS),
     datasets: [
       {
         data: chartData.map((tipo) => tipo.TotalVitimas),

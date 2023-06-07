@@ -5,11 +5,23 @@ export function OcorrenciaEstatisticas({ estatisticas }) {
     <Container>
       <Item>
         <h5>Total de ligações</h5>
-        <h2>{estatisticas && estatisticas.TotalOcorrencias}</h2>
+        <h2>{estatisticas && estatisticas.totalOcorrencias}</h2>
       </Item>
       <Item>
         <h5>Tempo resposta</h5>
-        <h2>{estatisticas && estatisticas.MediaTempoResposta} min</h2>
+        <h2>{estatisticas && estatisticas.tempoRespostaMedio} min</h2>
+      </Item>
+      <Item>
+        <h5>Tempo QTY-QUS</h5>
+        <h2>{estatisticas && estatisticas.tempoRespostaQTYQUS} min</h2>
+      </Item>
+      <Item>
+        <h5>Tempo QUS-QUY</h5>
+        <h2>{estatisticas && estatisticas.tempoRespostaQUSQUY} min</h2>
+      </Item>
+      <Item>
+        <h5>Tempo QUY-QUU</h5>
+        <h2>{estatisticas && estatisticas.tempoRespostaQUYQUU} min</h2>
       </Item>
     </Container>
   );
@@ -27,7 +39,14 @@ const Item = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-sm);
   background-color: white;
-  box-shadow: var(--card-shadow);
+  box-shadow: var(--shadow-1);
+  font-weight: 600;
+  
+  color: var(--text-dark);
+  h2 {
+    font-weight: 700;
+    color: var(--secondary);
+  }
 `;

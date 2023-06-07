@@ -22,10 +22,10 @@ ChartJS.register(
 
 export function GraficoVitimaIdade({ chartData }) {
   const data = {
-    labels: chartData.map(item=> item.FaixaEtaria),
+    labels: chartData.map(item=> item.faixaEtaria),
     datasets: [
       {
-        data: chartData.map(item=> item.TotalVitimas),
+        data: chartData.map(item=> item.totalVitimas),
         backgroundColor: ["#19A7CE"],
       },
     ],
