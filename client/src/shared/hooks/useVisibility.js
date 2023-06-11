@@ -11,9 +11,9 @@ export const useVisibility = (initialState = false) => {
     setIsVisible(false);
   };
 
-  return {
+  return [
     isVisible,
     show,
     hidde,
-  };
+  ];
 };

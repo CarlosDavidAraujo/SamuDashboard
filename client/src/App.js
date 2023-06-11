@@ -1,19 +1,23 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes";
-import { MainLayout } from "./shared/layouts/MainLayout";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./theme";
+import { Sidebar } from "./shared/components/navbar/Sidebar";
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <MainLayout>
-        <RouterProvider router={router} />
-      </MainLayout>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <ThemeProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <Sidebar>
+          <RouterProvider router={router}/> 
+        </Sidebar>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 

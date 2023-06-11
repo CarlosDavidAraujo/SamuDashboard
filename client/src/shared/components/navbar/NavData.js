@@ -1,24 +1,21 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChartSimple,
-  faPhoneVolume,
-  faClock
-} from "@fortawesome/free-solid-svg-icons";
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import HourglassDisabledIcon from '@mui/icons-material/HourglassDisabled';
 
 export const navData = [
   {
     label: "Ocorrências",
     pathname: "/",
-    icon: <FontAwesomeIcon icon={faPhoneVolume} />,
+    icon: <PhoneInTalkIcon/>,
   },
   {
     label: "Epidemiologia",
     pathname: "/epidemiologia",
-    icon: <FontAwesomeIcon icon={faChartSimple} />,
+    icon: <TrendingUpIcon/>,
   },
   {
     label: "Tempo resposta",
     pathname: "/temporesposta",
-    icon: <FontAwesomeIcon icon={faClock}/> 
+    icon: <HourglassDisabledIcon/>, 
   }
 ];
