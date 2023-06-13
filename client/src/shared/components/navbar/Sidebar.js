@@ -21,21 +21,21 @@ import { useTheme } from "@emotion/react";
 export function Sidebar({ children }) {
   const theme = useTheme();
   const currentPath = window.location.pathname;
-  const [isOpen, openDrawer, closeDrawer] = useVisibility(false);
+  const {isVisible, show, hidde} = useVisibility(false);
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={isOpen}>
+      <AppBar position="fixed" open={isVisible}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={openDrawer}
+            onClick={show}
             edge="start"
             sx={{
               marginRight: 5,
-              ...(isOpen && { display: "none" }),
+              ...(isVisible && { display: "none" }),
             }}
           >
             <MenuIcon />
@@ -45,9 +45,9 @@ export function Sidebar({ children }) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={isOpen}>
+      <Drawer variant="permanent" open={isVisible}>
         <DrawerHeader>
-          <IconButton onClick={closeDrawer}>
+          <IconButton onClick={hidde}>
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>

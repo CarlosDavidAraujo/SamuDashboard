@@ -1,14 +1,17 @@
-import styled from "styled-components";
+//bibliotecas
+import { TextField, styled } from "@mui/material";
 
+//componentes
 import { GraficoVitimaSexo } from "../components/GraficoVitimaSexo";
 import { GraficoVitimaTipo } from "../components/GraficoVitimaTipo";
 import { GraficoVitimaIdade } from "../components/GraficoVitimaIdade";
-import { Input } from "../../../shared/components/inputs/Input";
+
+//hooks, utils e contexts
 import { useChartDataByDate } from "../hooks/useChartDataByDate";
 import { useMonth } from "../../../shared/hooks/useMonth";
 
 export function EpidemiologiaPage() {
-  const {month, handleMonthChange} = useMonth();
+  const { month, handleMonthChange } = useMonth();
   const { error, isError, isLoading, data } = useChartDataByDate(month);
 
   if (isLoading) {
@@ -22,7 +25,14 @@ export function EpidemiologiaPage() {
   return (
     <Container>
       <Filters>
-        <Input type="month" value={month} onChange={handleMonthChange} />
+        <TextField
+          variant="outlined"
+          color="secondary"
+          type="month"
+          focused
+          value={month}
+          onChange={handleMonthChange}
+        />
       </Filters>
 
       <ChartList>
@@ -34,18 +44,20 @@ export function EpidemiologiaPage() {
   );
 }
 
-const Container = styled.div`
+//-------------------ESTILOS-------------------------//
+
+const Container = styled("div")`
   display: flex;
   flex-direction: column;
   padding: 20px;
 `;
 
-const Filters = styled.div`
+const Filters = styled("div")`
   margin-bottom: 40px;
   display: flex;
 `;
 
-const ChartList = styled.div`
+const ChartList = styled("div")`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 10px;

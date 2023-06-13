@@ -1,51 +1,44 @@
-import styled from "styled-components";
+//bibliotecas
+import { TextField, styled } from "@mui/material";
+
+//componentes
 import { TabelaVeiculos } from "../components/TabelaVeiculos";
-import { useTempoRespostaVeiculoQuery } from "../hooks/useTempoRespostaVeiculoQuery";
-import { Input } from "../../../shared/components/inputs/Input";
-import { useMonth } from "../../../shared/hooks/useMonth";
 import { TabelaUnidadesDestino } from "../components/TabelaUnidadesDestino";
+
+//hooks, utils e contexts
+import { useMonth } from "../../../shared/hooks/useMonth";
 
 export function TempoRespostaPage() {
   const { month, handleMonthChange } = useMonth();
-  const { isError, isLoading, error, data } =
-    useTempoRespostaVeiculoQuery(month);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error: {error}</div>;
-  }
 
   return (
-    <Container>
+    <div>
       <Menu>
-        <Input type="month" value={month} onChange={handleMonthChange}/>
+        <TextField
+          variant="outlined"
+          color="secondary"
+          type="month"
+          focused
+          value={month}
+          onChange={handleMonthChange}
+        />
       </Menu>
       <Content>
-        <TabelaVeiculos temposRespostaPorVeiculo={data} />
-        <TabelaUnidadesDestino date={month}/>
+        <TabelaVeiculos date={month} />
+        <TabelaUnidadesDestino date={month} />
       </Content>
-    </Container>
+    </div>
   );
 }
 
-const Container = styled.div`
-  padding: 20px;
+//------------------------ESTILOS--------------------//
+const Menu = styled("div")`
+  display: flex;
+  margin-bottom: ${(props) => props.theme.spacing(3)};
 `;
 
-const Menu = styled.div`
+const Content = styled("div")`
+  height: calc(100vh - 192px);
   display: flex;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const Content = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  > div {
-    flex-grow: 1;
-  }
+  gap: ${(props) => props.theme.spacing(2)};
 `;

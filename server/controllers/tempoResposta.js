@@ -67,7 +67,7 @@ module.exports.consultaTempoRespostaPorUnidadeDestino = async (req, res) => {
     const queryMediaUnidade = `
       SELECT 
         HDG.DESTINOID AS DestinoID,
-        UD.UnidadeDS AS unidade,
+        UD.UnidadeDS AS nome,
       AVG(DATEDIFF(minute, OM.ChegadaDestinoDT, OM.RetornoDestinoDT)) AS tempoResposta
       FROM HISTORICO_DECISAO_GESTORA AS HDG
       INNER JOIN OcorrenciaMovimentacao AS OM ON OM.OcorrenciaID = HDG.OCORRENCIAID

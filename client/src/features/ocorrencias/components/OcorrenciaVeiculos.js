@@ -1,19 +1,22 @@
-import styled from "styled-components";
+//bibliotecas
+import { styled } from "@mui/material";
+
+//componentes
 import { OcorrenciaVeiculo } from "./OcorrenciaVeiculo";
 
-export function OcorrenciaVeiculos({ ocorrencia }) {
-  const veiculos = JSON.parse(ocorrencia.veiculos);
-
+export function OcorrenciaVeiculos({ veiculos}) {
   return (
     <Container>
       {veiculos?.map((veiculo, i) => (
-        <OcorrenciaVeiculo veiculo={veiculo} key={i} />
+        <OcorrenciaVeiculo veiculo={veiculo} key={i}/>
       ))}
     </Container>
   );
 }
 
-const Container = styled.div`
+//--------------------ESTILOS--------------------//
+
+const Container = styled('div')`
   position: relative;
   display: flex;
   flex-wrap: wrap;

@@ -9,7 +9,7 @@ const consultaOcorrencias = (connection) => {
       O.RISCOCOD as risco,
       OP.OperadorNM as operador, 
       M.MotivoDS as motivo, 
-      AVI.AVALICAO as avaliacao,
+      --AVI.AVALICAO as avaliacao,
       (
         SELECT 
           V.VeiculoDS AS nome, 
@@ -29,7 +29,7 @@ const consultaOcorrencias = (connection) => {
     FROM Ocorrencia O 
     LEFT JOIN OperadoresDados OP ON O.OperadorId = OP.OperadorID 
     JOIN Motivo M ON O.MotivoID = M.MotivoID
-    LEFT JOIN OCORRENCIA_AVALIACAO_INICIAL AVI ON O.OcorrenciaID = AVI.OCORRENCIAID
+    --LEFT JOIN OCORRENCIA_AVALIACAO_INICIAL AVI ON O.OcorrenciaID = AVI.OCORRENCIAID
     -- WHERE CONVERT(DATE, O.DtHr) = CONVERT(DATE, GETDATE())
     ORDER BY O.RISCOCOD ASC, O.DtHr DESC;
   `;

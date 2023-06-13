@@ -1,5 +1,8 @@
+//componentes
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+
+//hooks, utils e contexts
 import { useState } from "react";
 
 export function ButtonGroup({ onChange, buttons = ["1", "2", "3"] }) {

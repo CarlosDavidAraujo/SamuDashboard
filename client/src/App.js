@@ -3,6 +3,7 @@ import { router } from "./routes";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { ThemeProvider } from "@mui/material";
+import { CssBaseline } from '@mui/material';
 import { theme } from "./theme";
 import { Sidebar } from "./shared/components/navbar/Sidebar";
 
@@ -12,10 +13,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
+        <CssBaseline/>
         <Sidebar>
           <RouterProvider router={router}/> 
         </Sidebar>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
     </ThemeProvider>
   );

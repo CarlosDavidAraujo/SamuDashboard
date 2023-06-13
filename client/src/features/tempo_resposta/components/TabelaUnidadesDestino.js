@@ -1,6 +1,9 @@
-import styled from "styled-components";
-import { Table } from "../../../shared/styles/table";
+//components
+import { ScrollableTable } from "../../../shared/components/tables/ScrollableTable";
+
+//hooks, utils e contexts
 import { useTempoRespostaUnidadeQuery } from "../hooks/useTempoRespostaUnidadeQuery";
+import { getTableConfigDestino } from "../utils/getTableConfigDestino";
 
 export function TabelaUnidadesDestino({ date }) {
   const { isError, error, data, isLoading } =
@@ -14,44 +17,8 @@ export function TabelaUnidadesDestino({ date }) {
     return <h3>{error}</h3>;
   }
 
-  return (
-    <Container>
-      <Scroll>
-        <Table>
-          <Table.Header>
-            <tr>
-              <th>Unidade de destino</th>
-              <th>Tempo de permanência no hospital (min)</th>
-            </tr>
-          </Table.Header>
-          <Table.Body>
-            {data.mediaUnidade.map((item, i) => (
-              <tr key={i}>
-                <td style={{ fontWeight: "700" }}>{item.unidade}</td>
-                <td>{item.tempoResposta}</td>
-              </tr>
-            ))}
-          </Table.Body>
-          <Table.Footer>
-            <tr>
-              <td>Média</td>
-              <td>{data.mediaGeral[0].tempoResposta}</td>
-            </tr>
-          </Table.Footer>
-        </Table>
-      </Scroll>
-    </Container>
-  );
+  const { tableColumns, tableData } = getTableConfigDestino(data);
+
+  return <ScrollableTable columns={tableColumns} data={tableData} />;
 }
 
-const Container = styled.div`
-  background-color: white;
-  border-radius: var(--border-radius-sm);
-  box-shadow: var(--shadow-1);
-  overflow: hidden;
-`;
-
-const Scroll = styled.div`
-  max-height: 80vh;
-  overflow: auto;
-`;

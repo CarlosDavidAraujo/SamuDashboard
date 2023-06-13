@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import { useRef } from "react";
 
+/**
+ * Hook personalizado para detectar cliques fora de um elemento específico.
+ * @param {Function} callback - Função a ser chamada quando ocorrer um clique fora do elemento.
+ * @returns {Object} Uma referência ao elemento DOM que está sendo monitorado.
+ */
 export function useClickOutside(callback) {
   const ref = useRef();
 

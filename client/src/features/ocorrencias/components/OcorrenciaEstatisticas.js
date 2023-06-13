@@ -1,3 +1,4 @@
+//bibliotecas
 import { Paper, Typography, styled } from "@mui/material";
 
 export function OcorrenciaEstatisticas({ estatisticas }) {
@@ -36,6 +37,8 @@ export function OcorrenciaEstatisticas({ estatisticas }) {
     </Container>
   );
 }
+
+//------------------ESTILOS----------------------//
 
 const Container = styled("div")`
   display: grid;

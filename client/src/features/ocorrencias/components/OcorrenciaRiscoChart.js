@@ -5,10 +5,14 @@ import { ChartContainer } from "../../../shared/components/ChartContainer";
 ChartJS.register(ArcElement, Title, Tooltip, Legend);
 
 export function OcorrenciaRiscoChart({ riskCount }) {
+  console.log('risco', riskCount);
   const data = {
     labels: Object.keys(riskCount).map((risco) => {
       if (risco === "90") {
-        return "Sem classificação";
+        return "Não regulado";
+      }
+      if (risco === "0") {
+        return "Não informado";
       }
       return `Risco ${risco}`;
     }),
@@ -16,6 +20,7 @@ export function OcorrenciaRiscoChart({ riskCount }) {
       {
         data: Object.values(riskCount),
         backgroundColor: [
+          "lightgray", // não regulado
           "#d25151", //risco 1 vermelho
           "#D2C551", //risco 2 amarelo
           "#518CD2", //risco 3 verde

@@ -1,55 +1,24 @@
-import styled from "styled-components";
-import { Table } from "../../../shared/styles/table";
+//components
+import { ScrollableTable } from "../../../shared/components/tables/ScrollableTable";
 
-export function TabelaVeiculos({ temposRespostaPorVeiculo }) {
-  return (
-    <Container>
-      <Scroll>
-        <Table>
-          <Table.Header>
-            <tr>
-              <th>Veículo</th>
-              <th>QTY-QUS (min)</th>
-              <th>QUS-QUY (min)</th>
-              <th>QUY-QUU (min)</th>
-            </tr>
-          </Table.Header>
-          <Table.Body>
-            {temposRespostaPorVeiculo.mediaVeiculo.map((item, i) => (
-              <tr key={i}>
-                <td style={{ fontWeight: "700" }}>{item.veiculo}</td>
-                <td>{item.qty_qus}</td>
-                <td>{item.qus_quy}</td>
-                <td>{item.quy_quu}</td>
-              </tr>
-            ))}
-          </Table.Body>
-          <Table.Footer>
-            <tr>
-              <td>Média</td>
-              {temposRespostaPorVeiculo.mediaGeral.map((item, i) => (
-                <>
-                  <td>{item.qty_qus}</td>
-                  <td>{item.qus_quy}</td>
-                  <td>{item.quy_quu}</td>
-                </>
-              ))}
-            </tr>
-          </Table.Footer>
-        </Table>
-      </Scroll>
-    </Container>
-  );
+//hooks, utils e contexts
+import { useTempoRespostaVeiculoQuery } from "../hooks/useTempoRespostaVeiculoQuery";
+import { getTableConfigVeiculo } from "../utils/getTableConfigVeiculo";
+
+export function TabelaVeiculos({ date }) {
+  const { isError, isLoading, error, data } =
+    useTempoRespostaVeiculoQuery(date);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error: {error}</div>;
+  }
+
+  const { tableColumns, tableData } = getTableConfigVeiculo(data);
+
+  return <ScrollableTable columns={tableColumns} data={tableData} />;
 }
 
-const Container = styled.div`
-  background-color: white;
-  border-radius: var(--border-radius-sm);
-  box-shadow: var(--shadow-1);
-  overflow: hidden;
-`;
-
-const Scroll = styled.div`
-  max-height: 80vh;
-  overflow: auto;
-`;

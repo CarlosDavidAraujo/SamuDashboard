@@ -1,3 +1,8 @@
+/**
+ * Calcula a contagem de ocorrências por nível de risco.
+ * @param {Array} ocorrencias - As ocorrências a serem contadas.
+ * @returns {Object} Um objeto contendo a contagem de ocorrências por nível de risco.
+ */
 export function getRiskCount(ocorrencias) {
   const riskCount = {};
   for (const ocorrencia of ocorrencias) {
